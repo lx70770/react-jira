@@ -4,9 +4,9 @@ import { useDebounce } from './useDebounce'
 
 export { apiUrl, useDebounce }
 
-export const isFalsy = (value: any) => (value === 0 ? false : !value)
+export const isFalsy = (value: unknown) => (value === 0 ? false : !value)
 
-export const isVoid = (value: any) => value === undefined || value === null || value === ''
+export const isVoid = (value: unknown) => value === undefined || value === null || value === ''
 
 export const cleanObject = (object: object) => {
 	if (!object) {
