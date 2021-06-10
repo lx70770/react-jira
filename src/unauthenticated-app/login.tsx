@@ -1,21 +1,8 @@
-import * as qs from 'qs'
-import React, { FormEvent } from 'react'
-import { apiUrl } from 'utils'
+import { useAuth } from 'context/auth-context'
+import { FormEvent } from 'react'
 
 export const LoginScreen = () => {
-	const login = (param: { username: string; password: string }) => {
-		fetch(`${apiUrl}/login`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(param)
-		}).then(async response => {
-			if (response.ok) {
-				// setList(await response.json())
-			}
-		})
-	}
+	const { login, user } = useAuth()
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
@@ -26,6 +13,7 @@ export const LoginScreen = () => {
 
 	return (
 		<form onSubmit={handleSubmit}>
+			{user ? <div>{user?.name}</div> : null}
 			<div>
 				<label htmlFor="username">用户名</label>
 				<input type="text" id="username" />
