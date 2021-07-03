@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import * as qs from 'qs'
 import { apiUrl, cleanObject, useDebounce, useMount } from 'utils/index'
 import { List } from './list'
-import { SearcePanel } from './search-panel'
+import { SearchPanel } from './search-panel'
 import { useHttp } from 'utils/http'
 
 export const ProjectListScreen = () => {
@@ -26,7 +26,7 @@ export const ProjectListScreen = () => {
 
 	return (
 		<div>
-			<SearcePanel users={users} param={param} setParam={setParam} />
+			<SearchPanel users={users || []} param={param} setParam={setParam} />
 			<List list={list} users={users} />
 		</div>
 	)

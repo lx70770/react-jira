@@ -1,3 +1,5 @@
+import { Input, Select } from 'antd'
+
 export interface User {
 	id: string
 	name: string
@@ -7,28 +9,28 @@ export interface User {
 	token: string
 }
 
-interface SearcePanelProps {
+interface SearchPanelProps {
 	users: User[]
 	param: {
 		name: string
 		personId: string
 	}
-	setParam: (param: SearcePanelProps['param']) => void
+	setParam: (param: SearchPanelProps['param']) => void
 }
 
-export const SearcePanel = ({ users, param, setParam }: SearcePanelProps) => {
+export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
 	return (
 		<form action="">
 			<div>
-				<input type="text" value={param.name} onChange={e => setParam({ ...param, name: e.target.value })} />
-				<select value={param.personId} onChange={e => setParam({ ...param, personId: e.target.value })}>
-					<option value="">负责人</option>
+				<Input type="text" value={param.name} onChange={e => setParam({ ...param, name: e.target.value })} />
+				<Select value={param.personId} onChange={value => setParam({ ...param, personId: value })}>
+					<Select.Option value="">负责人</Select.Option>
 					{users.map(user => (
-						<option key={user.id} value={user.id}>
+						<Select.Option key={user.id} value={user.id}>
 							{user.name}
-						</option>
+						</Select.Option>
 					))}
-				</select>
+				</Select>
 			</div>
 		</form>
 	)

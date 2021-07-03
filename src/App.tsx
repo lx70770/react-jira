@@ -1,11 +1,11 @@
 import { useAuth } from 'context/auth-context'
-import { UnanthenticatedApp } from 'unauthenticated-app'
+import { UnauthenticatedApp } from 'unauthenticated-app'
 import { AuthenticatedApp } from './authencated-app'
 import './App.css'
 
 function App() {
 	const { user } = useAuth()
-	return <div className="App">{user ? <AuthenticatedApp /> : <UnanthenticatedApp />}</div>
+	return <div className="App">{user ? <AuthenticatedApp /> : <UnauthenticatedApp />}</div>
 }
 
 export default App
