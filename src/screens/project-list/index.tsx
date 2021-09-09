@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import * as qs from 'qs'
-import { apiUrl, cleanObject, useDebounce, useMount } from 'utils/index'
+import { cleanObject, useDebounce, useMount } from 'utils/index'
+import styled from '@emotion/styled'
 import { List } from './list'
 import { SearchPanel } from './search-panel'
 import { useHttp } from 'utils/http'
@@ -18,6 +18,7 @@ export const ProjectListScreen = () => {
 
   useEffect(() => {
     client('projects', { data: cleanObject(debouncedParam) }).then(setList)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedParam])
 
   useMount(() => {
@@ -25,9 +26,16 @@ export const ProjectListScreen = () => {
   })
 
   return (
-    <div>
+    <ScreenContainer>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       <List list={list} users={users} />
-    </div>
+    </ScreenContainer>
   )
 }
+
+export const ScreenContainer = styled.div`
+  padding: 3.2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`

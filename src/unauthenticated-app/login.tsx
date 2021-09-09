@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd'
+import { Form, Input } from 'antd'
 import { useAuth } from 'context/auth-context'
 import { LongButton } from 'unauthenticated-app'
 
@@ -18,7 +18,7 @@ export const LoginScreen = () => {
       <Form.Item name="password" rules={[{ required: true, message: '请输入密码' }]}>
         <Input type="password" placeholder="密码" id="password" />
       </Form.Item>
-      <Form.Item name="password">
+      <Form.Item name="login">
         <LongButton type="primary" htmlType="submit">
           登录
         </LongButton>

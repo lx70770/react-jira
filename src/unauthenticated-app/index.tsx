@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { RegisterScreen } from 'unauthenticated-app/register'
 import { LoginScreen } from 'unauthenticated-app/login'
 import { Button, Card, Divider } from 'antd'
@@ -9,7 +9,7 @@ import right from 'assets/right.svg'
 
 export const UnauthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false)
-  const [error, setError] = useState<Error | null>(null)
+  //   const [error, setError] = useState<Error | null>(null)
 
   return (
     <Container>
