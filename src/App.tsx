@@ -4,8 +4,8 @@ import { AuthenticatedApp } from './authencated-app'
 import './App.css'
 
 function App() {
-	const { user } = useAuth()
-	return <div className="App">{user ? <AuthenticatedApp /> : <UnauthenticatedApp />}</div>
+  const { user } = useAuth()
+  return <div className="App">{user ? <AuthenticatedApp /> : <UnauthenticatedApp />}</div>
 }
 
 export default App
