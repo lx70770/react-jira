@@ -1,20 +1,12 @@
-import { Table } from 'antd'
+import { Table, TableProps } from 'antd'
+import { Project } from 'types/project'
 import { User } from 'types/user'
 
-interface Project {
-  id: string
-  name: string
-  personId: number
-  pin: boolean
-  organization: string
-}
-
-interface ListProps {
-  list: Project[]
+interface ListProps extends TableProps<Project> {
   users: User[]
 }
 
-export const List = ({ users, list }: ListProps) => {
+export const List = ({ users, ...props }: ListProps) => {
   return (
     <Table
       rowKey={'id'}
@@ -36,7 +28,7 @@ export const List = ({ users, list }: ListProps) => {
           }
         }
       ]}
-      dataSource={list}
+      {...props}
     />
   )
 }
