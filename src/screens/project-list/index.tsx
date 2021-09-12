@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import { useDebounce, useMount } from 'utils/index'
+import { useDebounce } from 'utils/index'
 import styled from '@emotion/styled'
 import { List } from './list'
 import { SearchPanel } from './search-panel'
-import { useHttp } from 'utils/http'
 import { useProjects } from 'hooks/use-project'
 import { useUsers } from 'utils/user'
+import { useDocumentTitle } from 'hooks/use-document-title'
 
 export const ProjectListScreen = () => {
+  useDocumentTitle('管理列表', false)
+
   const [param, setParam] = useState({
     name: '',
     personId: ''
