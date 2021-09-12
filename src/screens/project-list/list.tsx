@@ -1,4 +1,5 @@
 import { Table, TableProps } from 'antd'
+import { Link } from 'react-router-dom'
 import { Project } from 'types/project'
 import { User } from 'types/user'
 
@@ -15,7 +16,10 @@ export const List = ({ users, ...props }: ListProps) => {
         {
           title: '名称',
           dataIndex: 'name',
-          sorter: (a, b) => a.name.localeCompare(b.name)
+          sorter: (a, b) => a.name.localeCompare(b.name),
+          render: (_, project) => {
+            return <Link to={String(project.id)}>{project.name}</Link>
+          }
         },
         {
           title: '部门',

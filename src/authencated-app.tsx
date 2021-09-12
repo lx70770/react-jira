@@ -1,9 +1,12 @@
-import { ProjectListScreen } from 'screens/project-list'
-import { useAuth } from 'context/auth-context'
+import { Route, Routes } from 'react-router'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Button, Dropdown, Menu } from 'antd'
 import { ReactComponent as SoftwareLogo } from 'assets/software-logo.svg'
 import styled from '@emotion/styled'
 import { ButtonNoPadding, Row } from 'components/lib'
-import { Button, Dropdown, Menu } from 'antd'
+import { useAuth } from 'context/auth-context'
+import { ProjectListScreen } from 'screens/project-list'
+import { ProjectScreen } from 'screens/project'
 
 /**
  * grid 和 flex 各自的应用场景
@@ -24,7 +27,12 @@ export const AuthenticatedApp = () => {
     <Container>
       <PageHeader />
       <Main>
-        <ProjectListScreen />
+        <Router>
+          <Routes>
+            <Route path={'/projects'} element={<ProjectListScreen />} />
+            <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} />
+          </Routes>
+        </Router>
       </Main>
     </Container>
   )
