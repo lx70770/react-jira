@@ -1,5 +1,5 @@
 import apiUrl from './api-url'
-import { isFalsy, isVoid, cleanObject } from './common'
-import { useDebounce, useMount } from './hooks'
+import { isFalsy, isVoid, cleanObject, resetRoute } from './common'
+import { useDebounce, useMount, useUrlQueryParams } from './hooks'
 
-export { apiUrl, useDebounce, useMount, isFalsy, isVoid, cleanObject }
+export { apiUrl, useDebounce, useMount, useUrlQueryParams, isFalsy, isVoid, cleanObject, resetRoute }

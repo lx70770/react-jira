@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Button, Dropdown, Menu } from 'antd'
 import { ReactComponent as SoftwareLogo } from 'assets/software-logo.svg'
 import styled from '@emotion/styled'
@@ -7,32 +7,26 @@ import { ButtonNoPadding, Row } from 'components/lib'
 import { useAuth } from 'context/auth-context'
 import { ProjectListScreen } from 'screens/project-list'
 import { ProjectScreen } from 'screens/project'
-
-/**
- * grid 和 flex 各自的应用场景
- * 1. 要考虑，是一维布局 还是 二维布局
- * 一般来说，一维布局用flex，二维布局用grid
- * 2. 是从内容出发还是从布局出发？
- * 从内容出发：你先有一组内容(数量一般不固定),然后希望他们均匀的分布在容器中，由内容自己的大小决定占据的空间
- * 从布局出发：先规划网格(数量一般比较固定)，然后再把元素往里填充
- * 从内容出发，用flex
- * 从布局出发，用grid
- *
- */
-
-// prop drilling
+import { resetRoute } from 'utils'
+import { useEffect } from 'react'
 
 export const AuthenticatedApp = () => {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (window.location.pathname === '/') {
+      navigate('projects')
+    }
+  }, [])
+
   return (
     <Container>
       <PageHeader />
       <Main>
-        <Router>
-          <Routes>
-            <Route path={'/projects'} element={<ProjectListScreen />} />
-            <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} />
-          </Routes>
-        </Router>
+        <Routes>
+          <Route path={'/projects'} element={<ProjectListScreen />} />
+          <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} />
+        </Routes>
       </Main>
     </Container>
   )
@@ -42,7 +36,7 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <ButtonNoPadding type={'link'}>
+        <ButtonNoPadding type={'link'} onClick={resetRoute}>
           <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
         </ButtonNoPadding>
       </HeaderLeft>

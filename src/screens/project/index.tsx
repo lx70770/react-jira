@@ -1,8 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Navigate, Route, Routes, useLocation } from 'react-router'
 import styled from '@emotion/styled'
 import { Menu } from 'antd'
+import { KanbanScreen } from 'screens/kanban'
+import { EpicScreen } from 'screens/epic'
 
 const useRouteType = () => {
   const units = useLocation().pathname.split('/')
@@ -11,6 +13,14 @@ const useRouteType = () => {
 
 export const ProjectScreen = () => {
   const routeType = useRouteType()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (window.location.pathname === '/') {
+      navigate(window.location.pathname + '/kanban')
+    }
+  }, [])
+
   return (
     <Container>
       <Aside>
@@ -25,11 +35,8 @@ export const ProjectScreen = () => {
       </Aside>
       <Main>
         <Routes>
-          {/*projects/:projectId/kanban*/}
-          {/* <Route path={'/kanban'} element={<KanbanScreen />} />
-          {/*projects/:projectId/epic*/}
-          {/* <Route path={'/epic'} element={<EpicScreen />} /> */}
-          {/* <Navigate to={window.location.pathname + '/kanban'} replace={true} /> */}
+          <Route path={'/kanban'} element={<KanbanScreen />} />
+          <Route path={'/epic'} element={<EpicScreen />} />
         </Routes>
       </Main>
     </Container>

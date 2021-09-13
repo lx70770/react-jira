@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDebounce } from 'utils/index'
+import { useDebounce, useUrlQueryParams } from 'utils/index'
 import styled from '@emotion/styled'
 import { List } from './list'
 import { SearchPanel } from './search-panel'
@@ -10,11 +10,9 @@ import { useDocumentTitle } from 'hooks/use-document-title'
 export const ProjectListScreen = () => {
   useDocumentTitle('管理列表', false)
 
-  const [param, setParam] = useState({
-    name: '',
-    personId: ''
-  })
-
+  const [keys] = useState<('name' | 'personId')[]>(['name', 'personId'])
+  const [param, setParam] = useUrlQueryParams(keys)
+  console.log(param)
   const debouncedParam = useDebounce(param, 200)
 
   const { isLoading, error, data: list } = useProjects(debouncedParam)
@@ -28,6 +26,8 @@ export const ProjectListScreen = () => {
     </ScreenContainer>
   )
 }
+
+ProjectListScreen.whyDidYouRender = false
 
 export const ScreenContainer = styled.div`
   padding: 3.2rem;
