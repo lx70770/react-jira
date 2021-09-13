@@ -1,21 +1,17 @@
-import { useState } from 'react'
-import { useDebounce, useUrlQueryParams } from 'utils/index'
+import { useDebounce } from 'utils/index'
 import styled from '@emotion/styled'
 import { List } from './list'
 import { SearchPanel } from './search-panel'
 import { useProjects } from 'hooks/use-project'
 import { useUsers } from 'utils/user'
 import { useDocumentTitle } from 'hooks/use-document-title'
+import { useProjectsSearchParams } from './util'
 
 export const ProjectListScreen = () => {
   useDocumentTitle('管理列表', false)
 
-  const [keys] = useState<('name' | 'personId')[]>(['name', 'personId'])
-  const [param, setParam] = useUrlQueryParams(keys)
-  console.log(param)
-  const debouncedParam = useDebounce(param, 200)
-
-  const { isLoading, error, data: list } = useProjects(debouncedParam)
+  const [param, setParam] = useProjectsSearchParams()
+  const { isLoading, error, data: list } = useProjects(useDebounce(param, 200))
   const { data: users } = useUsers()
 
   return (
